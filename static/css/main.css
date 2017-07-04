@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    width: 812px;
+    height: auto;
+    position: relative;
+    background: #eee;
+    margin: auto;
+    top: 100px;
+}
+
+.img_container {
+    display: inline-block;
+    width: 200px;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#mask {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    display: none;
+    z-index: 1;
+    text-align: center;
+    line-height: 50px;
+    color: rgba(255, 255, 255, .6);
+    font-size: 25px;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+    top: 220px;
+}
