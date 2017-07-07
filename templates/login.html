@@ -35,15 +35,21 @@
             position: inherit;
             margin: 0 auto;
             top: 150px;
-            border-radius: 7px;
-            box-shadow: 0 9px 25px #111;
+            border-radius: 15px;
+            box-shadow: 0 29px 85px #333;
+            z-index: 100;
         }
 
         #login-tab {
             width: 450px;
-            height: 15px;
+            height: 35px;
             background: #000;
             position: relative;
+            color: #fff;
+            line-height: 35px;
+            font-size: 18px;
+            padding-left: 5px;
+            font-family: "sans-serif";
         }
 
         #login-logo {
@@ -57,6 +63,23 @@
             padding: 10px;
             position: relative;
             top: 40px;
+        }
+
+        #login-shadow {
+            width: 750px;
+            height: 150px;
+            border-radius: 75%;
+            box-shadow: 0 2px 25px 0 #999;
+            position: relative;
+            margin: auto;
+            top: 100px;
+            z-index: 20;
+            display: none;
+
+        }
+
+        .control-label {
+            color: #666;
         }
 
         #submit_btn {
@@ -84,14 +107,124 @@
         #pwd_ERR, #name_ERR {
             color: red;
         }
-        .inline-box{ display: inline-block;}
-        #Num-box{
-            position: relative;
-            left:-12px;
-            top:1px;
+
+        .inline-box {
+            display: inline-block;
         }
-        #randomNums:hover{
+
+        #Num-box {
+            position: relative;
+            left: -12px;
+            top: 1px;
+        }
+
+        #randomNums:hover {
             cursor: pointer;
+        }
+
+        #login-mask {
+            background: rgba(0, 0, 0, .6);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            z-index: 200;
+        }
+
+        #login-mask-box {
+            width: 128px;
+            height: 128px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -65px;
+            margin-top: -65px;
+        }
+
+        .loading {
+            width: 150px;
+            height: 15px;
+            position: absolute;
+            left:50%;
+            top:40%;
+            margin-left:-75px;
+            margin-top:-8px;
+            text-align: center;
+        }
+
+        .loading span {
+            display: inline-block;
+            width: 15px;
+            height: 100%;
+            margin-right: 5px;
+            background: #ffffff;
+            -webkit-animation: load 1.04s ease infinite;
+            -ms-animation: load 1.04s ease infinite;
+            -moz-animation: load 1.04s ease infinite;
+            animation: load 1.04s ease infinite;
+        }
+
+        .loading span:last-child {
+            margin-right: 0px;
+        }
+
+        @-webkit-keyframes load {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @-ms-keyframes load {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes load {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .loading span:nth-child(1) {
+            -webkit-animation-delay: 0.13s;
+            -ms-animation-delay: 0.13s;
+            -moz-animation-delay: 0.13s;
+        }
+
+        .loading span:nth-child(2) {
+            -webkit-animation-delay: 0.26s;
+            -ms-animation-delay: 0.26s;
+            -moz-animation-delay: 0.26s;
+        }
+
+        .loading span:nth-child(3) {
+            -webkit-animation-delay: 0.39s;
+            -ms-animation-delay: 0.39s;
+            -moz-animation-delay: 0.39s;
+        }
+
+        .loading span:nth-child(4) {
+            -webkit-animation-delay: 0.52s;
+            -ms-animation-delay: 0.52s;
+            -moz-animation-delay: 0.52s;
+        }
+
+        .loading span:nth-child(5) {
+            -webkit-animation-delay: 0.65s;
+            -ms-animation-delay: 0.65s;
+            -moz-animation-delay: 0.65s;
         }
 
     </style>
@@ -100,7 +233,7 @@
 <div id="header"></div>
 <div id="container">
     <div id="login-box">
-        <div id="login-tab"></div>
+        <div id="login-tab">Login</div>
         <div id="login-info">
             <form class="form-horizontal" id="login-form">
                 <div class="form-group">
@@ -121,11 +254,11 @@
                 </div>
                 <div class="form-group">
                     <label for="checkNum" class="col-sm-2 control-label">Number</label>
-                    <div class="col-sm-3 inline-box" id="Num-leftBox" >
+                    <div class="col-sm-3 inline-box" id="Num-leftBox">
                         <input type="text" class="form-control inline-box" id="checkNum" placeholder="验证码"/>
                     </div>
                     <div id="Num-box" class="inline-box">
-                        <img id="randomNums" src="/create_code_img/" />
+                        <img id="randomNums" src="/create_code_img/"/>
                     </div>
 
                     <!--<div class="col-sm-offset-2 col-sm-3 inline-box"  id="Num-rightBox">
@@ -148,7 +281,17 @@
             </form>
         </div>
     </div>
+    <div id="login-shadow"></div>
 </div>
 
+<div id="login-mask">
+    <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
 </body>
 </html>

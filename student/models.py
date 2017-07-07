@@ -5,6 +5,7 @@ class User(models.Model):
     name =  models.CharField(max_length=16)
     age = models.IntegerField(16)
     password = models.CharField(max_length=32)
+    statue = models.IntegerField(16)
 
     def __unicode__(self):
         return self.name

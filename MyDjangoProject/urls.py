@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from student.views import showInfo, showLoginPage, UserLogin ,checkInput, create_code_img
+from student.views import showInfo, showLoginPage, UserLogin ,checkInput, create_code_img, loginout
 
 from django.conf import settings
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^index/', showLoginPage),
     url(r'^showInfo/', showInfo),
     url(r'^checkInput$', checkInput),
+    url(r'^loginout$', loginout),
     url(r'^create_code_img',create_code_img),
     url(r'^UserLogin$', UserLogin), #还要匹配后面的AJAX数据所以不能这样写r'^UserLogin/' 报500错误
 ]

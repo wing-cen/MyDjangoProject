@@ -11,12 +11,13 @@ init_chars = ''.join((_letter_cases, _upper_cases, _numbers))
 @csrf_exempt
 def create_validate_code(size=(120, 30),
                          chars=init_chars,
-                         img_type="PNG",
+                         img_type="JPEG",
                          mode="RGB",
                          bg_color=(255, 255, 255),
-                         fg_color=(0, 0, 0),
-                         font_size=16,
-                         font_type="Monaco.ttf",
+                         # fg_color=(0, 0, 0),
+                         font_size=20,
+                         font_type="./MONACO.TTF",
+                         # font_type="wqy.ttc",
                          length=4,
                          draw_lines=True,
                          n_line=(1, 2),
@@ -72,16 +73,24 @@ def create_validate_code(size=(120, 30),
                     draw.point((w, h), fill=(0, 0, 0))
 
     def create_strs():
-        """绘制验证码字符"""
+        """绘制验证码字符  动态生成颜色"""
         c_chars = get_chars()
+        j = 0
         strs = ' %s ' % ' '.join(c_chars)  # 每个字符前后以空格隔开
+        try:
+            font = ImageFont.truetype(font_type, font_size)
+        except Exception as e :
+            font = ImageFont.truetype("consola", font_size) #避免字体错误情况图片出错
 
-        font = ImageFont.truetype(font_type, font_size)
-        font_width, font_height = font.getsize(strs)
-
-        draw.text(((width - font_width) / 3, (height - font_height) / 3),
-                  strs, font=font, fill=fg_color)
-
+        for i in c_chars:
+            r = random.randint(0, 174)
+            g = random.randint(122, 242)
+            b = random.randint(0, 245)
+            ram_color = (r, g, b)
+            h = random.randint(1, 2)
+            w = width / 4 * j
+            draw.text((w,h),i, font=font, fill=ram_color) #绘制字符
+            j = j + 1
         return ''.join(c_chars)
 
     if draw_lines:
@@ -91,17 +100,17 @@ def create_validate_code(size=(120, 30),
     strs = create_strs()
 
     # 图形扭曲参数
-    params = [1 - float(random.randint(1, 2)) / 100,
+    params = [1 - float(random.randint(1, 2)) / 500,
               0,
               0,
               0,
               1 - float(random.randint(1, 10)) / 100,
               float(random.randint(1, 2)) / 500,
-              0.001,
+              0.0001,
               float(random.randint(1, 2)) / 500
               ]
     img = img.transform(size, Image.PERSPECTIVE, params)  # 创建扭曲
 
-    img = img.filter(ImageFilter.EDGE_ENHANCE_MORE)  # 滤镜，边界加强（阈值更大）
+    img = img.filter(ImageFilter.UnsharpMask)  # 滤镜，边界加强（阈值更大）UnsharpMask
 
     return img, strs

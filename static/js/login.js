@@ -15,6 +15,9 @@ $(function () {
         if (checkUserInput() == "err") {
             return;
         }
+        $("#login-mask").css("display","block");
+        setTimeout(function(){},5000);
+
         getLoginParms();//刷新data数据
 
         Wing.AJAX({
@@ -25,13 +28,27 @@ $(function () {
 
             suc: function success(data) {
                 if (data.statue == 1) {//密码错误
+                    $("#login-mask").css("display","none");
                     showInfo("Password Error!");
                 } else if (data.statue == 2) {//用户名错误
+                    $("#login-mask").css("display","none");
                     showInfo("Username Error!");
-                } else if(data.statue == 3){
+                } else if(data.statue == 3){ //验证码错误
+                    $("#login-mask").css("display","none");
                     $("#randomNums").click();
                     showInfo("Random code Error!");
-                } else{
+                } else if(data.statue == 4){//用户已经登录
+                    $("#login-mask").css("display","none");
+                    showInfo("You had already logined!");
+
+                    setTimeout(function () {
+                        $("#container").empty();
+                        $("#container").html(data);
+                    },2500)
+                } else{//登录成功
+                    setTimeout(function(){
+                        $("#login-mask").css("display","none");
+                    },2000)
                     $("#container").empty();
                     $("#container").html(data);
                     $.getScript("{% static 'js/main.js' %}");
@@ -50,7 +67,7 @@ $(function () {
             dataType: "JSON",
             url: "/checkInput?" + _version,
             suc: function success(data) {
-                if (data.statue == 4) {
+                if (data.statue == 5) {
                     $(".input-icons").hide();
                     $("#" + name + "_OK").fadeIn(1);
                 } else {
@@ -112,7 +129,21 @@ $(function () {
 		}
 	});
 
-    //wing
+    //  $(window).close(function(){
+    //      alert(12);
+    //     Wing.AJAX({
+    //         type: "POST",
+    //         data: {"name":Data.name},
+    //         dataType: "JSON",
+    //         url: "/loginout?" + _version,
+    //         suc: function success(data) {
+    //             console.log("OK");
+    //         },
+    //         err: function (data) {
+    //
+    //         }
+    //     })
+    // });
 
 
 });
