@@ -19,7 +19,7 @@
         #header {
             width: inherit;
             height: 15px;
-            background: #000;
+            background: rgb(52,73,94);
         }
 
         #container {
@@ -30,20 +30,21 @@
 
         #login-box {
             width: 450px;
-            height: 300px;
+            min-height: 300px;
             background: #FFF;
             position: inherit;
             margin: 0 auto;
+            padding-bottom:20px;
             top: 150px;
             border-radius: 15px;
-            box-shadow: 0 29px 85px #333;
+            box-shadow: 0 29px 85px #666;
             z-index: 100;
         }
 
         #login-tab {
             width: 450px;
             height: 35px;
-            background: #000;
+            background: rgb(52,73,94);
             position: relative;
             color: #fff;
             line-height: 35px;
@@ -62,20 +63,8 @@
         #login-info {
             padding: 10px;
             position: relative;
-            top: 40px;
-        }
-
-        #login-shadow {
-            width: 750px;
-            height: 150px;
-            border-radius: 75%;
-            box-shadow: 0 2px 25px 0 #999;
-            position: relative;
-            margin: auto;
-            top: 100px;
-            z-index: 20;
-            display: none;
-
+            padding-left:60px;
+            top: 20px;
         }
 
         .control-label {
@@ -83,7 +72,13 @@
         }
 
         #submit_btn {
-            width: 60%;
+            width: 68%;
+        }
+
+        .lable-icon{
+            position: absolute;
+            right:22px;
+            top:10px;
         }
 
         #menu-box {
@@ -94,7 +89,7 @@
             text-align: center;
             color: red;
             font-size: 16px;
-            display: none;
+            display: block;
         }
 
         .input-icons {
@@ -131,16 +126,6 @@
             top: 0;
             display: none;
             z-index: 200;
-        }
-
-        #login-mask-box {
-            width: 128px;
-            height: 128px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -65px;
-            margin-top: -65px;
         }
 
         .loading {
@@ -237,23 +222,22 @@
         <div id="login-info">
             <form class="form-horizontal" id="login-form">
                 <div class="form-group">
-                    <label for="username" class="col-sm-2 control-label">username:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="wing-input form-control" id="username" placeholder="Username"/>
+                    <div class="col-sm-11">
+                        <input type="text" class="wing-input form-control" id="username" placeholder="用户名"/>
+                        <label for="username" class="glyphicon glyphicon-user lable-icon"></label>
                     </div>
                     <i id="name_OK" class="input-icons glyphicon glyphicon-ok"></i>
                     <i id="name_ERR" class="input-icons glyphicon glyphicon-remove"></i>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="wing-input form-control" id="password" placeholder="Password"/>
+                    <div class="col-sm-11">
+                        <input type="password" class="wing-input form-control" id="password" placeholder="密码"/>
+                        <label for="password" class="lable-icon glyphicon glyphicon-lock"></label>
                     </div>
                     <i id="pwd_OK" class="input-icons glyphicon glyphicon-ok"></i>
                     <i id="pwd_ERR" class="input-icons glyphicon glyphicon-remove"></i>
                 </div>
                 <div class="form-group">
-                    <label for="checkNum" class="col-sm-2 control-label">Number</label>
                     <div class="col-sm-3 inline-box" id="Num-leftBox">
                         <input type="text" class="form-control inline-box" id="checkNum" placeholder="验证码"/>
                     </div>
@@ -270,18 +254,17 @@
                     </div>-->
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-12">
-                        <input type="button" id="submit_btn" value="Sign in" class="btn btn-warning"/>
-                        <input type="button" id="forget_btn" value="Find" class="btn btn-default"/>
+                    <div class="col-sm-12">
+                        <input type="button" id="submit_btn" value="登录" class="btn btn-success"/>
+                        <input type="button" id="forget_btn" value="找回密码" class="btn btn-default"/>
                     </div>
                 </div>
-                <div id="ERR_info">
 
+                <div id="ERR_info">
                 </div>
             </form>
         </div>
     </div>
-    <div id="login-shadow"></div>
 </div>
 
 <div id="login-mask">

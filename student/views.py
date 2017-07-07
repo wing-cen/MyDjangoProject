@@ -17,7 +17,7 @@ def showInfo(request):
      return render_to_response('student.html',{'students': user})
 
 def showLoginPage(request):
-    return render(request,'login.html')    #render 相当于打包的意思，第一个参数固定
+    return render(request,'login.html')   #render 相当于打包的意思，第一个参数固定
 
 @csrf_exempt   #取消当前的跨站请求伪造功能
 def UserLogin(request):
@@ -75,7 +75,6 @@ def create_code_img(request):
     img, code = check_code.create_validate_code()  # 调用check_code生成照片和验证码
     request.session['check_code'] = code  # 将验证码存在服务器的session中，用于校验
     img.save(f, 'JPEG')  # 生成的图片放置于开辟的内存中
-    # img.save("C:/temp.png")
     return HttpResponse(f.getvalue())  # 将内存的数据读取出来，并以HttpResponse返回
 
 @csrf_exempt

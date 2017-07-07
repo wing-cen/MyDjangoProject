@@ -15,8 +15,9 @@ $(function () {
         if (checkUserInput() == "err") {
             return;
         }
-        $("#login-mask").css("display","block");
-        setTimeout(function(){},5000);
+        $("#login-mask").css("display", "block");
+        setTimeout(function () {
+        }, 5000);
 
         getLoginParms();//刷新data数据
 
@@ -28,30 +29,31 @@ $(function () {
 
             suc: function success(data) {
                 if (data.statue == 1) {//密码错误
-                    $("#login-mask").css("display","none");
-                    showInfo("Password Error!");
+                    $("#login-mask").css("display", "none");
+                    showInfo("密码错误啦!");
                 } else if (data.statue == 2) {//用户名错误
-                    $("#login-mask").css("display","none");
-                    showInfo("Username Error!");
-                } else if(data.statue == 3){ //验证码错误
-                    $("#login-mask").css("display","none");
+                    $("#login-mask").css("display", "none");
+                    showInfo("用户名错啦!");
+                } else if (data.statue == 3) { //验证码错误
+                    $("#login-mask").css("display", "none");
                     $("#randomNums").click();
-                    showInfo("Random code Error!");
-                } else if(data.statue == 4){//用户已经登录
-                    $("#login-mask").css("display","none");
-                    showInfo("You had already logined!");
+                    showInfo("验证码错啦!");
+                } else if (data.statue == 4) {//用户已经登录
+                    $("#login-mask").css("display", "none");
+                    showInfo("你已经登录啦!");
 
                     setTimeout(function () {
                         $("#container").empty();
                         $("#container").html(data);
-                    },2500)
-                } else{//登录成功
-                    setTimeout(function(){
-                        $("#login-mask").css("display","none");
-                    },2000)
-                    $("#container").empty();
-                    $("#container").html(data);
-                    $.getScript("{% static 'js/main.js' %}");
+                    }, 2500)
+                } else {//登录成功
+                    setTimeout(function () {
+                        $("#container").empty();
+                        $("#container").html(data);
+                        $.getScript("{% static 'js/main.js' %}");
+                        $("#login-mask").css("display", "none");
+                    }, 2000)
+
                 }
             },
             err: function (data) {
@@ -103,7 +105,7 @@ $(function () {
 
     function checkUserInput(e) {
         if ($("#username").val() == "" || $("#password").val() == "" || $("#checkNum").val() == "") {
-            showInfo("data can't be empty!")
+            showInfo("你都还没输入数据，想逆天?")
             return "err";
         }
     }
@@ -117,17 +119,17 @@ $(function () {
         //src后面加问好会自动刷新验证码img的src#
     }
 
-    $("#randomNums").click(function(){
+    $("#randomNums").click(function () {
         refresh_check_code(this)
         $("#checkNum").val("");
     })
 
     //click enter login
-    $("body").keydown(function(e) {
-		if(e.keyCode == 13) {
+    $("body").keydown(function (e) {
+        if (e.keyCode == 13) {
             $("#submit_btn").click();
-		}
-	});
+        }
+    });
 
     //  $(window).close(function(){
     //      alert(12);
