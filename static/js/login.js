@@ -30,14 +30,14 @@ $(function () {
             suc: function success(data) {
                 if (data.statue == 1) {//密码错误
                     $("#login-mask").css("display", "none");
-                    showInfo("密码错误啦!");
+                    showInfo("密码错误!");
                 } else if (data.statue == 2) {//用户名错误
                     $("#login-mask").css("display", "none");
-                    showInfo("用户名错啦!");
+                    showInfo("用户名错误!");
                 } else if (data.statue == 3) { //验证码错误
                     $("#login-mask").css("display", "none");
                     $("#randomNums").click();
-                    showInfo("验证码错啦!");
+                    showInfo("验证码错误!");
                 } else if (data.statue == 4) {//用户已经登录
                     $("#login-mask").css("display", "none");
                     showInfo("你已经登录啦!");
@@ -105,13 +105,14 @@ $(function () {
 
     function checkUserInput(e) {
         if ($("#username").val() == "" || $("#password").val() == "" || $("#checkNum").val() == "") {
-            showInfo("你都还没输入数据，想逆天?")
+            showInfo("请输入数据")
             return "err";
         }
     }
 
     function showInfo(info) {
-        $("#ERR_info").stop().fadeIn(1).html(info).fadeOut(3500);
+        $("#show-info").html(info);
+        $("#Err-info").stop().fadeIn(1).fadeOut(3500);
     }
 
     function refresh_check_code(ths) {
@@ -146,6 +147,5 @@ $(function () {
     //         }
     //     })
     // });
-
 
 });

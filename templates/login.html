@@ -85,13 +85,6 @@
             margin: 0 auto;
         }
 
-        #ERR_info {
-            text-align: center;
-            color: red;
-            font-size: 16px;
-            display: block;
-        }
-
         .input-icons {
             float: left;
             color: green;
@@ -126,6 +119,40 @@
             top: 0;
             display: none;
             z-index: 200;
+        }
+
+        #Err-info{
+            background: rgba(0, 0, 0, .5);
+            color:#FFF;
+            width:140px;
+            height: 140px;
+            position: absolute;
+            margin-left:-70px;
+            margin-top:-70px;
+            left: 50%;
+            top: 40%;
+            z-index: 500;
+            border-radius: 15px;
+            display:none;
+            text-align: center;
+        }
+
+        #info-logo{
+            width:inherit;
+            height:50%;
+            margin-top:30px;
+        }
+
+        #info-logo span {
+            font-size: 34px;
+        }
+
+        #show-info{
+            width:inherit;
+            height:50%;
+            color:#FFF;
+            font-size: 18px;
+            font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
         }
 
         .loading {
@@ -259,9 +286,6 @@
                         <input type="button" id="forget_btn" value="找回密码" class="btn btn-default"/>
                     </div>
                 </div>
-
-                <div id="ERR_info">
-                </div>
             </form>
         </div>
     </div>
@@ -275,6 +299,13 @@
         <span></span>
         <span></span>
     </div>
+</div>
+
+<div id="Err-info">
+    <div id="info-logo">
+        <span class="glyphicon glyphicon-alert"></span>
+    </div>
+    <p id="show-info"></p>
 </div>
 </body>
 </html>

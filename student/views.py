@@ -53,10 +53,10 @@ def checkInput(request):
     if request.method == "POST":
         data = request.POST
         print(data)
-        if data["flag"] == "1":      #ajax 传过来变成字符串
+        if data["flag"] == "1": #ajax 传过来变成字符串
             try:
                 user = User.objects.get(name=data["name"])
-                return HttpResponse(json.dumps({"statue": LoginStatue.Checking_OK.value}),
+                return HttpResponse(json.sdumps({"statue": LoginStatue.Checking_OK.value}),
                                     content_type='application/json')
             except User.DoesNotExist:
                 return HttpResponse(json.dumps({"statue": LoginStatue.UserName_ERR.value}),
@@ -69,6 +69,8 @@ def checkInput(request):
             except User.DoesNotExist:
                 return HttpResponse(json.dumps({"statue": LoginStatue.PassWord_ERR.value}),
                                     content_type='application/json')  # 密码错误
+
+
 
 def create_code_img(request):
     f = BytesIO()  # 直接在内存开辟一点空间存放临时生成的图片
@@ -84,6 +86,7 @@ def loginout(request):
         name = data["name"]
         user = User.objects.get(name=name)
         user.statue = 0
+        del request.session["name"]
         print(user)
         user.save()
         return HttpResponse(json.dumps({"statue": LoginStatue.Checking_OK.value}),
