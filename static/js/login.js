@@ -44,7 +44,10 @@ $(function () {
 
                     setTimeout(function () {
                         $("#container").empty();
-                        $("#container").html(data);
+                        $.get("main.html", function (result) {
+                            console.log(result);
+                            $("#container").html(result);
+                        });
                     }, 2500)
                 } else {//登录成功
                     setTimeout(function () {
@@ -57,7 +60,7 @@ $(function () {
                 }
             },
             err: function (data) {
-                showInfo("ERROR")
+                showInfo("ERROR");
             }
         })
     });
@@ -70,10 +73,10 @@ $(function () {
             url: "/checkInput?" + _version,
             suc: function success(data) {
                 if (data.statue == 5) {
-                    $(".input-icons").hide();
+                    $("#" + name + "_ERR").hide();
                     $("#" + name + "_OK").fadeIn(1);
                 } else {
-                    $(".input-icons").hide();
+                    $("#" + name + "_OK").hide();
                     $("#" + name + "_ERR").fadeIn(1);
                 }
             },
@@ -105,7 +108,7 @@ $(function () {
 
     function checkUserInput(e) {
         if ($("#username").val() == "" || $("#password").val() == "" || $("#checkNum").val() == "") {
-            showInfo("请输入数据")
+            showInfo("请输入数据");
             return "err";
         }
     }
@@ -115,15 +118,21 @@ $(function () {
         $("#Err-info").stop().fadeIn(1).fadeOut(3500);
     }
 
+    $(".wing-input").focus(function(){
+        $(this).siblings().css("color","#428fff")
+    }).blur(function () {
+        $(this).siblings().css("color","#000")
+    });
+
     function refresh_check_code(ths) {
         ths.src += '?';
         //src后面加问好会自动刷新验证码img的src#
     }
 
     $("#randomNums").click(function () {
-        refresh_check_code(this)
+        refresh_check_code(this);
         $("#checkNum").val("");
-    })
+    });
 
     //click enter login
     $("body").keydown(function (e) {

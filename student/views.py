@@ -26,7 +26,6 @@ def UserLogin(request):
         name = data["name"]
         pwd = data["password"]
         code = data["code"]
-
         try:
             user = User.objects.get(name=name)
             if user.statue == 1:
@@ -35,9 +34,7 @@ def UserLogin(request):
             else:
                 if pwd == user.password:
                     if code.lower() == request.session["check_code"].lower():
-                        user.statue = 1
-                        user.save()
-                        print(user.statue)
+                        request.session["name"] = user.name
                         return render(request, 'main_menu.html')
                     else:
                         return HttpResponse(json.dumps({"statue": LoginStatue.Code_ERR.value}),
@@ -52,11 +49,10 @@ def UserLogin(request):
 def checkInput(request):
     if request.method == "POST":
         data = request.POST
-        print(data)
         if data["flag"] == "1": #ajax 传过来变成字符串
             try:
                 user = User.objects.get(name=data["name"])
-                return HttpResponse(json.sdumps({"statue": LoginStatue.Checking_OK.value}),
+                return HttpResponse(json.dumps({"statue": LoginStatue.Checking_OK.value}),
                                     content_type='application/json')
             except User.DoesNotExist:
                 return HttpResponse(json.dumps({"statue": LoginStatue.UserName_ERR.value}),
