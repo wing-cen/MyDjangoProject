@@ -4,7 +4,7 @@
 $(function () {
     Data = {};
     _version = new Date().getTime();
-
+    Gvar = new Wing();
     var getLoginParms = function () {//封装数据
         Data.name = $("#username").val();
         Data.password = $("#password").val();
@@ -21,7 +21,7 @@ $(function () {
 
         getLoginParms();//刷新data数据
 
-        Wing.AJAX({
+        Gvar.AJAX({
             type: "POST",
             data: Data,
             dataType: "JSON",
@@ -66,7 +66,7 @@ $(function () {
     });
 
     function checkInput(Idata, name) {
-        Wing.AJAX({
+        Gvar.AJAX({
             type: "POST",
             data: Idata,
             dataType: "JSON",
@@ -126,7 +126,7 @@ $(function () {
 
     function refresh_check_code(ths) {
         ths.src += '?';
-        //src后面加问好会自动刷新验证码img的src#
+        //src后面加问号会自动刷新验证码img的src
     }
 
     $("#randomNums").click(function () {
@@ -141,20 +141,26 @@ $(function () {
         }
     });
 
-    //  $(window).close(function(){
-    //      alert(12);
-    //     Wing.AJAX({
-    //         type: "POST",
-    //         data: {"name":Data.name},
-    //         dataType: "JSON",
-    //         url: "/loginout?" + _version,
-    //         suc: function success(data) {
-    //             console.log("OK");
-    //         },
-    //         err: function (data) {
-    //
-    //         }
-    //     })
-    // });
+    function LoadIndexPage(func) {
+	Gvar.GetHtml({
+		webUrl: "template/main.html",
+		callback: function(html) {
+			jQuery("head").append('<link href="css/main.css" rel=\"stylesheet\" type=\"text/css\" />');
+			setTimeout(function() {
+				lan("config");
+			}, 10);
+			gVar.GetJS({
+				webUrl: "js/config.js",
+				callback: function() {
+					func();
+					gVar.GetJS({
+						webUrl: "js/cal.js",
+						callback: function() {}
+					});
+				}
+			});
+		}
+	});
+}
 
 });

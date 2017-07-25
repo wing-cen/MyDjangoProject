@@ -2,8 +2,10 @@
  * Created by wing on 2017/6/23.
  */
 
-var Wing = {
-    AJAX: function (option) {
+function Wing() {
+    this.Data = {};
+
+    this.AJAX = function (option) {
         $.ajax({
             type: option.type,
             url: option.url,
@@ -16,16 +18,31 @@ var Wing = {
             success: option.suc,
             error: option.err
         });
-    },
-    checkBrowserVer: function(){
+    };
+    this.checkBrowserVer = function(option){
 
-    },
+    };
 
-    getVersion:function(){
+    this.GetHtml = function (option) {
+        var opts = $.extend({
+            webUrl: "",
+			callback: function(data) {}
+        }, option);
+        $.get(opts.webUrl, opts.callback, "html");
+    };
+
+    this.GetJS = function (option) {
+		var opts = $.extend({
+			webUrl: "",
+			callback: function(data) {}
+		}, option);
+        $.getScript(opts.webUrl, opts.callback);
+    };
+
+    this.getVersion =function(){
         var version  = new Date().getTime();
         return version;
-    },
-    Data:{},
+    };
 }
 
 checkInputEnum = {

@@ -1,33 +1,32 @@
 ﻿<div id="content">
-    <div id="mask" >hello world</div>
-    <span class="img_container" style="background: #eebf89;" data-title = "main menu"></span>
-    <span class="img_container" style="background: #ff5a12;" data-title = "capture menu"></span>
-    <span class="img_container" style="background: #ffd836;" data-title = "record menu"></span>
-    <span class="img_container" style="background: #70ff0a;" data-title = "session menu"></span>
-    <span class="img_container" style="background: #27a7ff;" data-title = "setting menu"></span>
-    <span class="img_container" style="background: #ff93fe;" data-title = "playback menu"></span>
-    <span class="img_container" style="background: #6779ff;" data-title = "preview menu"></span>
-    <span class="img_container" style="background: #c4cc29;" data-title = "logout menu"></span>
+    <div id="mask">hello world</div>
+    <span class="img_container" style="background: #eebf89;" data-title="main menu"></span>
+    <span class="img_container" style="background: #ff5a12;" data-title="capture menu"></span>
+    <span class="img_container" style="background: #ffd836;" data-title="record menu"></span>
+    <span class="img_container" style="background: #70ff0a;" data-title="session menu"></span>
+    <span class="img_container" style="background: #27a7ff;" data-title="setting menu"></span>
+    <span class="img_container" style="background: #ff93fe;" data-title="playback menu"></span>
+    <span class="img_container" style="background: #6779ff;" data-title="preview menu"></span>
+    <span class="img_container" style="background: #c4cc29;" data-title="logout menu"></span>
 </div>
 
 <script type="text/javascript">
     $(function () {
-    $("span").hover(function () {
-        $("#mask").html($(this).attr("data-title"));
-        var xx = $(this).position().left;
-        var yy = $(this).position().top + 250;
-        $("#mask").stop().animate({
-            left: xx,
-            top: yy
-        }, 100).fadeIn("fast");
-    });
-    $("#content").hover(function () {
-        $("#mask").css("opacity", "1");
-    }, function () {
-        $("#mask").fadeOut(500);
-    });
+        $("span").hover(function () {
+            $("#mask").html($(this).attr("data-title"));
+            var xx = $(this).position().left;
+            var yy = $(this).position().top + 250;
+            $("#mask").stop().animate({
+                left: xx,
+                top: yy
+            }, 100).fadeIn("fast");
+        });
+        $("#content").hover(function () {
+            $("#mask").css("opacity", "1");
+        }, function () {
+            $("#mask").fadeOut(500);
+        });
 
-})
-
+    })
 </script>
 

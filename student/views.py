@@ -87,3 +87,12 @@ def loginout(request):
         user.save()
         return HttpResponse(json.dumps({"statue": LoginStatue.Checking_OK.value}),
                                     content_type='application/json')
+
+@csrf_exempt
+def delSession(request):
+    pass
+    if request.session["statue"]:
+        pass
+    else:
+        data = request.session["statue"]
+    pass
